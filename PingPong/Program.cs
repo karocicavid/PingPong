@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 namespace PINPONG
 {
     public delegate void Delegate(string mes);
@@ -11,9 +11,9 @@ namespace PINPONG
             Pingevent?.Invoke("Pong received Ping");
             Pingevent?.Invoke("Press S for shoot,E for exit :");
             string s = Console.ReadLine();
-            if (s == "s" || s == "S") { Pingpoints += 10;return s; }
-            else if (s == "e" || s == "E") {return s; }
-            else { Console.WriteLine("Wrong input,press E or S !");return Ping_turn(); }
+            if (s == "s" || s == "S") { Pingpoints += 10; return s; }
+            else if (s == "e" || s == "E") { return s; }
+            else { Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine("Wrong input,press E or S !");Console.ResetColor();return Ping_turn(); }
         }
     }
 
@@ -28,7 +28,7 @@ namespace PINPONG
             string s = Console.ReadLine();
             if (s == "s" || s == "S") { Pongpoints += 10; return s; }
             else if (s == "e" || s == "E") { return s; }
-            else { Console.WriteLine("Wrong input,press E or S !"); return Pong_turn(); }
+            else { Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine("Wrong input,press E or S !"); Console.ResetColor(); return Pong_turn(); }
         }
     }
 
@@ -40,7 +40,9 @@ namespace PINPONG
             Pong player2 = new Pong();
             player1.Pingevent += ShowMessage;
             player2.Pongevent += ShowMessage;
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("Game started!");
+            Console.ResetColor();
             bool check = true;
             string presskey;
             do
@@ -78,9 +80,11 @@ namespace PINPONG
                                 break;
                             }
                     }
-                } while (check1==true);
+                } while (check1 == true);
             } while (check == true);
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"Game Over \n Ping points - {player1.Pingpoints} , Pong points - {player2.Pongpoints}");
+            Console.Read();
         }
         public static void ShowMessage(string mes)
         {
